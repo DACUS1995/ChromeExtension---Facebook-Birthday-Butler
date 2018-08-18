@@ -1,0 +1,12 @@
+{
+    "name": "Facebook Birthday Butler",
+    "version": "1.0",
+    "description": "Facebook Birthday Butler",
+    "icons": {
+        "16": "assets/images/if_assistant_16.png",
+        "32": "assets/images/if_assistant_32.png",
+        "48": "assets/images/if_assistant_48.png",
+        "128": "assets/images/if_assistant_128.png"
+      },
+    "manifest_version": 2
+  }
