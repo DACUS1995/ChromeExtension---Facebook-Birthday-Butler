@@ -1,12 +1,34 @@
 {
-    "name": "Facebook Birthday Butler",
-    "version": "1.0",
-    "description": "Facebook Birthday Butler",
-    "icons": {
-        "16": "assets/images/if_assistant_16.png",
-        "32": "assets/images/if_assistant_32.png",
-        "48": "assets/images/if_assistant_48.png",
-        "128": "assets/images/if_assistant_128.png"
-      },
-    "manifest_version": 2
-  }
+	"name": "Facebook Birthday Butler",
+	"version": "1.0",
+	"description": "Facebook Birthday Butler",
+	"background": {
+		"scripts": ["src/background.js"],
+		"persistent": false
+	},
+	"options_page": "src/options.html",
+	"page_action": {
+		"default_popup": "/src/popup.html",
+		"default_icon": {
+			"16": "assets/images/if_assistant_16.png",
+			"32": "assets/images/if_assistant_32.png",
+			"48": "assets/images/if_assistant_48.png",
+			"128": "assets/images/if_assistant_128.png"
+		}
+	},
+	"icons": {
+		"16": "assets/images/if_assistant_16.png",
+		"32": "assets/images/if_assistant_32.png",
+		"48": "assets/images/if_assistant_48.png",
+		"128": "assets/images/if_assistant_128.png"
+	  },
+	"permissions": ["activeTab", "declarativeContent", "storage"],
+	"content_scripts": [
+		{
+		  "matches": ["https://*.gogoanime.in/*"],
+		  "run_at": "document_idle",
+		  "js": ["./src/contentScript.js"]
+		}
+	  ],
+	"manifest_version": 2
+}
