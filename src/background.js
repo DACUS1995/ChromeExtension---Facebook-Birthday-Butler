@@ -1,19 +1,32 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#3aa757'}, function() {
-    console.log('The color is green.');
-  });
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    chrome.declarativeContent.onPageChanged.addRules([{
-      conditions: [new chrome.declarativeContent.PageStateMatcher({
-        pageUrl: {hostEquals: 'developer.chrome.com'},
-      })],
-      actions: [new chrome.declarativeContent.ShowPageAction()]
-    }]);
-  });
+	console.log("The Buttler is on duty!");
+
+	chrome.storage.sync.set({color: '#3aa757'}, function() {
+		console.log('The color is green.');
+	});
+
+	const declarativeContentRule = {
+		conditions: [new chrome.declarativeContent.PageStateMatcher({
+			pageUrl: {hostEquals: "*.gogoanime.in/*"},
+		})],
+		actions: [new chrome.declarativeContent.ShowPageAction()]
+	};
+
+	/**
+	 * Define when the extension is usable.
+	 * (Added rules are saved across browser restarts and when loading 
+	 * the extension we need to remove them)
+	 * 
+	 * By using the page action API we can take action without inject content scripts
+	 */
+	chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+		chrome.declarativeContent.onPageChanged.addRules([declarativeContentRule]);
+	});
 });
+
+chrome.runtime.onSuspend.addListener(function() {
+	console.log("Unloading.");
+	chrome.browserAction.setBadgeText({text: ""});
+})

@@ -1,6 +1,6 @@
 {
 	"name": "Facebook Birthday Butler",
-	"version": "1.0",
+	"version": "1.1",
 	"description": "Facebook Birthday Butler",
 	"background": {
 		"scripts": ["src/background.js"],
@@ -23,12 +23,5 @@
 		"128": "assets/images/if_assistant_128.png"
 	  },
 	"permissions": ["activeTab", "declarativeContent", "storage"],
-	"content_scripts": [
-		{
-		  "matches": ["https://*.gogoanime.in/*"],
-		  "run_at": "document_idle",
-		  "js": ["./src/contentScript.js"]
-		}
-	  ],
 	"manifest_version": 2
 }
