@@ -1,4 +1,10 @@
 #main {
-    background-color: lightblue; 
-    margin: 25px 25px 25px 25px;
+    background-color: rgb(229, 245, 250); 
+    padding: 10px 75px 200px 75px;
+    min-height: 300px;
+    min-width: 350px;
+}
+
+.row {
+    margin: 25px 25px 25px 25px;  
 }

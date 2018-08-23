@@ -21,7 +21,7 @@
 		"32": "assets/images/if_assistant_32.png",
 		"48": "assets/images/if_assistant_48.png",
 		"128": "assets/images/if_assistant_128.png"
-	  },
+	},
 	"permissions": ["activeTab", "declarativeContent", "storage"],
 	"manifest_version": 2
 }
