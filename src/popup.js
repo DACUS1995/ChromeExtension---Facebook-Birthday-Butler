@@ -57,6 +57,16 @@ class Main
 		elActivateButton.addEventListener("click", event => {
 			this.activate();
 		});
+
+		// Listen for runtime messages
+		chrome.runtime.onMessage.addListener(function(request, sender, response){
+			// To check if the message was sent from a content script check for the existance of sender.tab
+			if(sender.tab)
+			{
+				console.log(request.message);
+				response({message: "received"});
+			}
+		});
 	}
 
 
@@ -85,6 +95,16 @@ class Main
 				file: 'src/contentScript.js' // Resolved relative to the Extension base URL :( )
 			});
 		});
+	}
+
+
+	sendContentScriptMessage(strSerializedMessage)
+	{
+		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+			chrome.tabs.sendMessage(tabs[0].id, {message: strSerializedMessage}, function(response) {
+				console.log(response.message);
+			});
+		});	
 	}
 
 
