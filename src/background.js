@@ -8,7 +8,13 @@ chrome.runtime.onInstalled.addListener(function()
 {
 	console.log("The Buttler is on duty!");
 
-	chrome.storage.sync.set({birthday: ''}, function() {
+	const objDefaultStorage = {
+		birthday: null,
+		responses: null,
+		exceptions: null
+	};
+
+	chrome.storage.sync.set({info: objDefaultStorage}, function() {
 		console.log("Birthday is set.");
 	});
 

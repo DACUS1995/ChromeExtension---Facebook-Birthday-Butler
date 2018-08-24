@@ -7,11 +7,13 @@ class ComponentBase
         this._elDivContainer = elDivContainer;
         this.constructor._instance = this;
     }
+    
 
     render()
     {
         throw new Error("Must be implmented!");
     }
+
 
     static instance(elDivContainer = null)
     {

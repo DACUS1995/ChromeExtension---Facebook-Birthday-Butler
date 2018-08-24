@@ -8,6 +8,7 @@ class ResponseExceptions extends ComponentBase
 	{
 		super(elDivContainer);
 	}
+	
 
     render()
     {

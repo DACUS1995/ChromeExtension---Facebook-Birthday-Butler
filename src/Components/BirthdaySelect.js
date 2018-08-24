@@ -11,8 +11,10 @@ class BirthdaySelect extends ComponentBase
 		this._datePicker = null;
 	}
 
+
 	render()
 	{
+		this._elDivContainer.classList.add("mx-auto");
 		this._elDivContainer.appendChild(document.createTextNode("Select your birthday: "))
 
 		const elDivDateSelectorContainer = document.createElement("input");
@@ -33,6 +35,7 @@ class BirthdaySelect extends ComponentBase
 		    }
 		})
 	}
+	
 
 	get datePicker()
 	{

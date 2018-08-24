@@ -13,22 +13,29 @@
 	</head>
 	<body>
 		<div id="main">
-			<div class="container">
+			<div class="icon-container">
+				<img id="icon-display" src="../assets/images/if_assistant_48.png" class="rounded-0 mx-auto d-block" alt="logo">
+			</div>
+			<div class="container mx-auto">
 				<div class="row justify-content-md-center">
 					<div id="birthday-selector">
 					</div>
-				</div>	
+				</div>
+				<hr class="style-two">
 				<div class="row justify-content-md-center">
-					<div id="response-pool">
+					<div class="col justify-content-center" id="response-pool">
 					</div>
-				</div>	
+				</div>
+				<hr class="style-two">
 				<div class="row justify-content-md-center">
 					<div id="exceptions">
 					</div>
+				</div>
+				<div class="command-panel">
+					<button id="save-button" style="margin: auto;" type="button" class="btn btn-outline-primary btn-sm center-block">Save</button>
+					<button id="activate-button" style="margin: auto;" type="button" class="btn btn-outline-success btn-sm center-block">Activate</button>
 				</div>	
 			</div>
-	
-			<button id="save-button" type="button" class="btn btn-outline-primary btn-sm">Save</button>
 		</div>
 
 		<!-- Main JS file -->
