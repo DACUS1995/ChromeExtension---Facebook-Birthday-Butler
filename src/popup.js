@@ -4,6 +4,7 @@ import {BirthdaySelect} from "./Components/BirthdaySelect.js";
 import {Responses} from "./Components/Responses.js";
 import {ResponseExceptions} from "./Components/ResponseExceptions.js";
 
+import * as config from "./config.js";
 
 class Main
 {
@@ -12,19 +13,33 @@ class Main
 		this.logInit()
 	}
 
-	init()
+	async init()
 	{
-		this.initializeStorageVariables();
+		await this.syncronizeStorageVariables();
 		this.renderComponents();
 		this.addEvents();
+		this.loadContentScript()
 	}
 
 
-	initializeStorageVariables()
+	syncronizeStorageVariables()
 	{
-		chrome.storage.sync.get('birthday', function(data) 
-		{
-			const birthday = data.birthday;
+		return new Promise((resolve, reject) => {
+			chrome.storage.sync.get(["birthday", "responses", "exceptions", "stoped"], function(objData) 
+			{
+				try
+				{
+					BirthdaySelect.instance().setRenderingValues(objData);
+					Responses.instance().setRenderingValues(objData);
+					ResponseExceptions.instance().setRenderingValues(objData);
+	
+					resolve();
+				}
+				catch(error)
+				{
+					reject(error)
+				}
+			});
 		});
 	}
 
@@ -48,7 +63,8 @@ class Main
 			this.saveToStorage({
 				birthday: strPickedDate,
 				responses: arrResponses,
-				exceptions: []
+				exceptions: [],
+				status: "stoped"
 			});
 		});
 
@@ -77,33 +93,63 @@ class Main
 	{
 		console.log(JSON.stringify(objConfig));
 
-		chrome.storage.sync.set({info: objConfig}, function() {
+		chrome.storage.sync.set(objConfig, function() {
 			console.log("Info updated");
 		});
 	}
 
 
 	/**
-	 * Activate the facebook automatic response function
+	 * Activate the facebook automatic response functionality
 	 */
 	activate()
 	{
-		console.log("Activated...");
+		console.log("Activated");
 
+		this.sendContentScriptMessage(
+			config.commandTypes.ACTION, 
+			config.commands.ACTIVATE
+		);
+	}
+
+
+	/**
+	 * Stop the facebook automatic response functionality
+	 */
+	stop()
+	{
+		console.log("Stoped");
+
+		this.sendContentScriptMessage(
+			config.commandTypes.ACTION, 
+			config.commands.STOP
+		);
+	}
+
+
+	loadContentScript()
+	{
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
 			chrome.tabs.executeScript({
-				file: 'src/contentScript.js' // Resolved relative to the Extension base URL :( )
+				file: config.CONTENT_SCRIPT_FILE_PATH // Resolved relative to the Extension base URL :( )
 			});
 		});
 	}
 
 
-	sendContentScriptMessage(strSerializedMessage)
+	sendContentScriptMessage(strMessageType, strSerializedContent)
 	{
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, {message: strSerializedMessage}, function(response) {
-				console.log(response.message);
-			});
+			chrome.tabs.sendMessage(
+				tabs[0].id, 
+				{
+					message: strSerializedContent,
+					type: strMessageType
+				}, 
+				function(response) {
+					console.log(response.message);
+				}
+			);
 		});	
 	}
 
@@ -114,4 +160,8 @@ class Main
 	}
 }
 
-(new Main()).init();
+(new Main())
+	.init()
+	.catch(error => {
+		console.error(error);
+	});

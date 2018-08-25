@@ -3,6 +3,14 @@
 // const HOSTNAME_TARAGET = 'developer.chrome.com'
 const HOSTNAME_TARAGET = 'www2.gogoanime.in';
 
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+	for (let key in changes) 
+	{
+		let storageChange = changes[key];
+		console.log(storageChange.newValue);
+	}
+  });
+
 
 chrome.runtime.onInstalled.addListener(function() 
 {
@@ -11,11 +19,12 @@ chrome.runtime.onInstalled.addListener(function()
 	const objDefaultStorage = {
 		birthday: null,
 		responses: null,
-		exceptions: null
+		exceptions: null,
+		stoped: null
 	};
 
-	chrome.storage.sync.set({info: objDefaultStorage}, function() {
-		console.log("Birthday is set.");
+	chrome.storage.sync.set(objDefaultStorage, function() {
+		console.log("Storage info reseted.");
 	});
 
 	const declarativeContentRule = 
@@ -42,5 +51,4 @@ chrome.runtime.onInstalled.addListener(function()
 chrome.runtime.onSuspend.addListener(function() 
 {
 	console.log("Unloading.");
-	chrome.browserAction.setBadgeText({text: ""});
 })
