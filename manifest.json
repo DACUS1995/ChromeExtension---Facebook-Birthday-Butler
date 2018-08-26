@@ -6,7 +6,6 @@
 		"scripts": ["src/background.js"],
 		"persistent": false
 	},
-	"options_page": "src/options.html",
 	"page_action": {
 		"default_popup": "/src/popup.html",
 		"default_icon": {
