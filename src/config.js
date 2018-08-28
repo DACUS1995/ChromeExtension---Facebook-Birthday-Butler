@@ -9,7 +9,7 @@ const commandTypes = {
 	ACTION: "action" 
 };
 
-const CONTENT_SCRIPT_FILE_PATH = "src/contentScript.js"; // Resolved relative to the Extension base URL :( 
+const CONTENT_SCRIPT_FILE_PATH = "src/ResponseAgent.js"; // Resolved relative to the Extension base URL :( 
 
 export {
 	commandTypes,

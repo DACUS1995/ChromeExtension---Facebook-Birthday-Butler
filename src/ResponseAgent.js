@@ -1,6 +1,19 @@
 "use strict"
 
-console.log("Hello");
+class ResponseAgent
+{
+    constructor()
+    {
+
+    }
+
+    init()
+    {
+
+    }
+}
+
+(new ResponseAgent).init();
 
 // Listen for runtime messages
 chrome.runtime.onMessage.addListener(function(request, sender, response){
