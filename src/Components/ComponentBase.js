@@ -19,10 +19,25 @@ class ComponentBase
 
     setRenderingValues(objData)
     {
-        this._birthday = objData.birthday;
-        this._responses = objData.responses;
-        this._exceptions = objData.exceptions;
-        this._stoped = objData.stoped;
+        if(objData)
+        {
+            this._birthday = objData.birthday;
+
+            if(!this._birthday)
+            {
+                //Handle first time storage sync
+                const dateNow = new Date();
+                this._birthday = `${dateNow.getDate()}/${dateNow.getMonth()}/${dateNow.getFullYear()}`;
+            }
+
+            this._responses = objData.responses;
+            this._exceptions = objData.exceptions;
+            this._stoped = objData.stoped;
+        }
+        else
+        {
+            throw new Error("Initial data object is missing!");
+        }
     }
 
 

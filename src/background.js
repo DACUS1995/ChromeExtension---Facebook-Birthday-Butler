@@ -1,7 +1,7 @@
 'use strict';
 
 // const HOSTNAME_TARAGET = 'developer.chrome.com'
-const HOSTNAME_TARAGET = 'www2.gogoanime.in';
+const HOSTNAME_TARAGET = 'www3.gogoanime.in';
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
 	for (let key in changes) 
