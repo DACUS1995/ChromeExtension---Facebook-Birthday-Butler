@@ -73,4 +73,4 @@ class ComponentBase
     }
 }
 
-export {ComponentBase};
+export default ComponentBase;

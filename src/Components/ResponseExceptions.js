@@ -1,6 +1,6 @@
 'use strict';
 
-import {ComponentBase} from "./ComponentBase.js";
+import ComponentBase from "./ComponentBase.js";
 
 class ResponseExceptions extends ComponentBase
 {
@@ -16,4 +16,4 @@ class ResponseExceptions extends ComponentBase
     }
 }
 
-export {ResponseExceptions};
+export default ResponseExceptions;

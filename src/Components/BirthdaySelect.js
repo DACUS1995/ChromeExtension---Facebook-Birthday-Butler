@@ -1,6 +1,6 @@
 'use strict';
 
-import {ComponentBase} from "./ComponentBase.js";
+import ComponentBase from "./ComponentBase.js";
 
 class BirthdaySelect extends ComponentBase
 {
@@ -60,4 +60,4 @@ class BirthdaySelect extends ComponentBase
 	}
 }
 
-export {BirthdaySelect};
+export default BirthdaySelect;

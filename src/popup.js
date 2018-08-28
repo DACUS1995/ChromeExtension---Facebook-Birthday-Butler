@@ -1,8 +1,8 @@
 'use strict';
 
-import {BirthdaySelect} from "./Components/BirthdaySelect.js";
-import {Responses} from "./Components/Responses.js";
-import {ResponseExceptions} from "./Components/ResponseExceptions.js";
+import BirthdaySelect from "./Components/BirthdaySelect.js";
+import Responses from "./Components/Responses.js";
+import ResponseExceptions from "./Components/ResponseExceptions.js";
 
 import * as config from "./config.js";
 
