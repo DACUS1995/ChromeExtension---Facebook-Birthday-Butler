@@ -1,5 +1,6 @@
 "use strict"
 
+// Content scripts do not support ES imports TODO find workaround
 import MessageHandler from "./ResponseAgentModules/MessageHandler.js";
 import BdayNotificationHandler from "./ResponseAgentModules/BdayNotificationsHandler.js";
 

@@ -147,7 +147,7 @@ class Main
 					type: strMessageType
 				}, 
 				function(response) {
-					console.log(response.message);
+					console.log(response);
 				}
 			);
 		});	
