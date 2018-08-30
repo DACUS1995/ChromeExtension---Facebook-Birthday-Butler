@@ -1,23 +1,93 @@
 "use strict"
 
-import MessageHandler from "./ResponseAgentModules/MessageHandler.js"
+import MessageHandler from "./ResponseAgentModules/MessageHandler.js";
+import BdayNotificationHandler from "./ResponseAgentModules/BdayNotificationsHandler.js";
 
 class ResponseAgent
 {
-    constructor()
-    {
-        this._incomingMessageHandler = null;
-    }
+	constructor()
+	{
+		this._incomingMessageHandler = null;
+		this._bdayNotificationHandler = null;
+		this._bRunning = false;
+		
+		this.objResponsesConfig = null;
+	}
 
-    init()
-    {
-        this._setup()
-    }
+	init()
+	{
+		this._setup()
+	}
 
-    _setup()
-    {
-        this._incomingMessageHandler = new MessageHandler(this);
-    }
+	async runResponseProcess()
+	{
+		if(this._bRunning)
+		{
+			console.log("Agent is allready running");
+			return;
+		}
+
+		this._bRunning = true;
+		
+		if(this._bdayNotificationHandler === null)
+		{
+			this._bdayNotificationHandler = new BdayNotificationHandler();
+		}
+		
+		// Always make sure we use the latest responses config
+		this.objResponsesConfig = await this._retrieveProcessConfig();
+		this._bdayNotificationHandler.setReponsesConfig(this.objResponsesConfig);
+		this._bdayNotificationHandler.registerNotificationEvents();
+	}
+
+	stopResponseProcess()
+	{
+		if(this._bRunning === false)
+		{
+			console.log("Agent must be running to be stoped.");
+		}
+
+		this._bRunning = false;
+		this._bdayNotificationHandler.stopNotificationEvents();
+	}
+
+	async reloadProcessConfig()
+	{
+		// If is running just restart it
+		if(this._bRunning)
+		{
+			this.stopResponseProcess();
+			await this.runResponseProcess();
+			return;
+		}
+
+		this.objResponsesConfig = await this._retrieveProcessConfig();
+	}
+
+	_retrieveProcessConfig()
+	{
+		return new Promise((resolve, reject) => {
+			chrome.storage.sync.get(["birthday", "responses", "exceptions", "stoped"], (objData) => 
+			{
+				try
+				{
+					resolve(objData);
+				}
+				catch(error)
+				{
+					reject(error)
+				}
+			});
+		});
+	}
+
+	_setup()
+	{
+		this._incomingMessageHandler = new MessageHandler(this);
+		this._incomingMessageHandler.listenForIncomingMessages();
+	}
+
+
 }
 
 (new ResponseAgent).init();
