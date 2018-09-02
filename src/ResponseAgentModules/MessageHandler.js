@@ -32,12 +32,12 @@ class MessageHandler
 	 */
 	async handleIncomingMessage(objIncomingMessage)
 	{
-		if(!(objIncomingMessage.type in Object.values(config.commandTypes)))
+		if(!(Object.values(config.commandTypes).includes(objIncomingMessage.type)))
 		{
 			throw new Error(`Invalid message type: ${objIncomingMessage.type} not in [${Object.values(config.commandTypes).join(", ")}]`);
 		}
 
-		if(!(objIncomingMessage.message in Object.values(config.commands)))
+		if(!(Object.values(config.commands).includes(objIncomingMessage.message)))
 		{
 			throw new Error(`Invalid command: ${objIncomingMessage.message}`);
 		}
