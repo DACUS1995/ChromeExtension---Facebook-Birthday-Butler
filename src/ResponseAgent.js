@@ -37,7 +37,7 @@ class ResponseAgent
 		
 		// Always make sure we use the latest responses config
 		this.objResponsesConfig = await this._retrieveProcessConfig();
-		this._bdayNotificationHandler.setReponsesConfig(this.objResponsesConfig);
+		this._bdayNotificationHandler.objResponsesConfig = this.objResponsesConfig;
 		this._bdayNotificationHandler.registerNotificationEvents();
 	}
 

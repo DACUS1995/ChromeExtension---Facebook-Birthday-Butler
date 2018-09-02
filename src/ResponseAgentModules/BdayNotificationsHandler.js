@@ -1,7 +1,12 @@
 class BdayNotificationHandler
 {
-    constructor()
+    /**
+     * @param {Object} [objResponsesConfig = null]
+     */
+    constructor(objResponsesConfig = null)
     {
+        this.objResponsesConfig = objResponsesConfig;
+        
         this._elNotificationNotifier = null;
         this._arrBirthdayWishesToBeProcessed = [];
     }
