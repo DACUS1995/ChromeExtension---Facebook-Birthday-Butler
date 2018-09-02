@@ -1,7 +1,6 @@
 'use strict';
 
-// const HOSTNAME_TARAGET = 'developer.chrome.com'
-const HOSTNAME_TARAGET = 'www3.gogoanime.in';
+import * as config from "./config.js";
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
 	for (let key in changes) 
@@ -30,7 +29,7 @@ chrome.runtime.onInstalled.addListener(function()
 	const declarativeContentRule = 
 	{
 		conditions: [new chrome.declarativeContent.PageStateMatcher({
-			pageUrl: {hostEquals: HOSTNAME_TARAGET},
+			pageUrl: {hostEquals: config.HOSTNAME_TARAGET},
 		})],
 		actions: [new chrome.declarativeContent.ShowPageAction()]
 	};

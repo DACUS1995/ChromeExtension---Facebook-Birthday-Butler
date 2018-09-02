@@ -1,10 +1,9 @@
 {
 	"name": "Facebook Birthday Butler",
-	"version": "1.1",
+	"version": "1.2",
 	"description": "Facebook Birthday Butler",
 	"background": {
-		"scripts": ["src/background.js"],
-		"persistent": false
+		"page": "/src/background.html"
 	},
 	"page_action": {
 		"default_popup": "/src/popup.html",
