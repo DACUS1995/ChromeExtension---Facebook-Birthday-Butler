@@ -1,4 +1,4 @@
-import {config} from "../config.js";
+import * as config from "../config.js";
 
 class MessageHandler
 {
@@ -12,13 +12,14 @@ class MessageHandler
 
 	listenForIncomingMessages()
 	{
-		chrome.runtime.onMessage.addListener(function(request, sender, response){
-
+		chrome.runtime.onMessage.addListener((request, sender, response) => 
+		{
 			// Check if the message was sent from a content script check for the existance of sender.tab
 			if(!sender.tab)
 			{
-				this.handleIncomingMessage(request).catch(error => console.log(error));
-				response({message: "received"});
+				this.handleIncomingMessage(request)
+				.then(() => response({message: "received"}))
+				.catch(error => console.log(error));
 			}
 		}); 
 	}
@@ -31,9 +32,9 @@ class MessageHandler
 	 */
 	async handleIncomingMessage(objIncomingMessage)
 	{
-		if(!(objIncomingMessage.type in Object.values(config.commndTypes)))
+		if(!(objIncomingMessage.type in Object.values(config.commandTypes)))
 		{
-			throw new Error(`Invalid message type: ${objIncomingMessage.type}`);
+			throw new Error(`Invalid message type: ${objIncomingMessage.type} not in [${Object.values(config.commandTypes).join(", ")}]`);
 		}
 
 		if(!(objIncomingMessage.message in Object.values(config.commands)))
@@ -43,7 +44,7 @@ class MessageHandler
 
 		switch(objIncomingMessage.type)
 		{
-			case config.commndTypes.NOTIFICATION:
+			case config.commandTypes.NOTIFICATION:
 				this.handleIncomingNotification(objIncomingMessage);
 				break;
 

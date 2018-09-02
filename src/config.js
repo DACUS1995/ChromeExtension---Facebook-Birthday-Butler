@@ -12,5 +12,5 @@ export const commandTypes = {
 };
 
 export const HOSTNAME_TARAGET = "www.facebook.com";
-export const CONTENT_SCRIPT_FILE_PATH = "src/ResponseAgent.js"; // Resolved relative to the Extension base URL :( 
+export const CONTENT_SCRIPT_FILE_PATH = "dist/bundleContentScript.js"; // Resolved relative to the Extension base URL :( 
 
