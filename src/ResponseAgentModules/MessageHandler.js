@@ -17,8 +17,9 @@ class MessageHandler
 			// Check if the message was sent from a content script check for the existance of sender.tab
 			if(!sender.tab)
 			{
+				response({message: "received"});
+				
 				this.handleIncomingMessage(request)
-				.then(() => response({message: "received"}))
 				.catch(error => console.log(error));
 			}
 		}); 

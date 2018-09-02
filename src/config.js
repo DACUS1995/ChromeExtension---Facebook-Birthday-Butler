@@ -11,6 +11,17 @@ export const commandTypes = {
 	ACTION: "action" 
 };
 
+export const Texts = {
+	en: {
+		ACTIVATE: "Activate",
+		STOP: "Stop"
+	},
+	ro: {
+		ACTIVATE: "Activează",
+		STOP: "Stop"
+	}
+};
+
 export const HOSTNAME_TARAGET = "www.facebook.com";
 export const CONTENT_SCRIPT_FILE_PATH = "dist/bundleContentScript.js"; // Resolved relative to the Extension base URL :( 
 

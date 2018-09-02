@@ -11,6 +11,11 @@ class Main
 	constructor()
 	{
 		this.logInit()
+
+		this._elActivateButton = document.getElementById("activate-button");
+		this._elSaveButton = document.getElementById("save-button");
+
+		this._lang = "en"; // TODO add lang to chrome storage for persistance
 	}
 
 	async init()
@@ -55,10 +60,9 @@ class Main
 	addEvents()
 	{
 		// Save buton event
-		const elSaveButton = document.getElementById("save-button");
-		elSaveButton.addEventListener("click", event => {
+		this._elSaveButton.addEventListener("click", event => {
 			const strPickedDate = BirthdaySelect.instance().datePicker.toString();
-			const arrResponses = Array.from(document.getElementsByClassName("responses")).map(el => el.value);
+			const arrResponses = [...document.getElementsByClassName("responses")].map(el => el.value);
 
 			this.saveToStorage({
 				birthday: strPickedDate,
@@ -69,9 +73,10 @@ class Main
 		});
 
 		// Activate button event
-		const elActivateButton = document.getElementById("activate-button");
-		elActivateButton.addEventListener("click", event => {
-			this.activate();
+		this._elActivateButton.addEventListener("click", async event => {
+			this._elActivateButton.innerText = this._elActivateButton.innerText === this.Texts.ACTIVATE 
+				? await this.activate() && this.Texts.STOP
+				: await this.stop() && this.Texts.ACTIVATE;
 		});
 
 		// Listen for runtime messages
@@ -101,12 +106,13 @@ class Main
 
 	/**
 	 * Activate the facebook automatic response functionality
+	 * @returns {boolean}
 	 */
-	activate()
+	async activate()
 	{
 		console.log("Activated");
 
-		this.sendContentScriptMessage(
+		return "received" === await this.sendContentScriptMessage(
 			config.commandTypes.ACTION, 
 			config.commands.ACTIVATE
 		);
@@ -115,12 +121,13 @@ class Main
 
 	/**
 	 * Stop the facebook automatic response functionality
+	 * @returns {boolean}
 	 */
-	stop()
+	async stop()
 	{
 		console.log("Stoped");
 
-		this.sendContentScriptMessage(
+		return "received" === await this.sendContentScriptMessage(
 			config.commandTypes.ACTION, 
 			config.commands.STOP
 		);
@@ -139,18 +146,20 @@ class Main
 
 	sendContentScriptMessage(strMessageType, strSerializedContent)
 	{
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			chrome.tabs.sendMessage(
-				tabs[0].id, 
-				{
-					message: strSerializedContent,
-					type: strMessageType
-				}, 
-				function(response) {
-					console.log(response);
-				}
-			);
-		});	
+		return new Promise((resolve, reject) => {
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+				chrome.tabs.sendMessage(
+					tabs[0].id, 
+					{
+						message: strSerializedContent,
+						type: strMessageType
+					}, 
+					function(response) {
+						resolve(response.message);
+					}
+				);
+			});	
+		});
 	}
 
 
@@ -158,7 +167,18 @@ class Main
 	{
 		console.log("Main");
 	}
+
+	get Texts()
+	{
+		if(this._lang in config.Texts)
+		{
+			return config.Texts[this._lang];
+		}
+
+		throw new Error("Language option is not present in the translation config");
+	}
 }
+
 
 (new Main())
 	.init()
