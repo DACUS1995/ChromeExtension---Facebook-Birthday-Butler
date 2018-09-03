@@ -52,6 +52,9 @@ class ResponseAgent
 		this._bdayNotificationHandler.stopNotificationEvents();
 	}
 
+	/**
+	 * Updates the information from the notification handler using the information from the storage
+	 */
 	async reloadProcessConfig()
 	{
 		// If is running just restart it

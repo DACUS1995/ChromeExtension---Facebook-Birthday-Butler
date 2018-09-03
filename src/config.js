@@ -1,5 +1,6 @@
 "use strict"
 
+// --- COMANDS ---
 export const commands = {
 	ACTIVATE: "activate",
 	STOP: "stop",
@@ -11,6 +12,7 @@ export const commandTypes = {
 	ACTION: "action" 
 };
 
+// --- TRANSLATIONS ---
 export const Texts = {
 	en: {
 		ACTIVATE: "Activate",
@@ -22,6 +24,8 @@ export const Texts = {
 	}
 };
 
+// --- CONSTANTS ---
+export const NOTIFICATION_CLASS_NAME = "_2n_9";
 export const HOSTNAME_TARAGET = "www.facebook.com";
 export const CONTENT_SCRIPT_FILE_PATH = "dist/bundleContentScript.js"; // Resolved relative to the Extension base URL :( 
 
