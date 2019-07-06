@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/DACUS1995/ChromeExtension---Facebook-Birthday-Butler#readme",
   "dependencies": {
-    "pikaday": "^1.7.0"
+    "pikaday": "^1.7.0",
+    "webpack": "^4.35.2"
   },
   "devDependencies": {
     "webpack-cli": "^3.1.0"

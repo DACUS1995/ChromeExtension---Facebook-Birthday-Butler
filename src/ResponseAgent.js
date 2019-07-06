@@ -71,17 +71,17 @@ class ResponseAgent
 	_retrieveProcessConfig()
 	{
 		return new Promise((resolve, reject) => {
-			chrome.storage.sync.get(["birthday", "responses", "exceptions", "stopped"], (objData) => 
+			try
 			{
-				try
+				chrome.storage.sync.get(["birthday", "responses", "exceptions", "stopped"], (objData) => 
 				{
 					resolve(objData);
-				}
-				catch(error)
-				{
-					reject(error)
-				}
-			});
+				});
+			}
+			catch(error)
+			{
+				reject(error)
+			}
 		});
 	}
 
