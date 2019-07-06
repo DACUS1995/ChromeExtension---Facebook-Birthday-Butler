@@ -7,7 +7,7 @@ class ComponentBase
         this._birthday = null;
         this._responses = null;
         this._exceptions = null;
-        this._stoped = null;
+        this._stopped = null;
     }
     
 
@@ -32,7 +32,7 @@ class ComponentBase
 
             this._responses = objData.responses;
             this._exceptions = objData.exceptions;
-            this._stoped = objData.stoped;
+            this._stopped = objData.stopped;
         }
         else
         {

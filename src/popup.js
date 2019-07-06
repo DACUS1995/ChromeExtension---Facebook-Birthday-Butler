@@ -30,7 +30,7 @@ class Main
 	syncronizeStorageVariables()
 	{
 		return new Promise((resolve, reject) => {
-			chrome.storage.sync.get(["birthday", "responses", "exceptions", "stoped"], function(objData) 
+			chrome.storage.sync.get(["birthday", "responses", "exceptions", "stopped"], function(objData) 
 			{
 				try
 				{
@@ -68,7 +68,7 @@ class Main
 				birthday: strPickedDate,
 				responses: arrResponses,
 				exceptions: [],
-				status: "stoped"
+				status: "stopped"
 			});
 		});
 
@@ -125,7 +125,7 @@ class Main
 	 */
 	async stop()
 	{
-		console.log("Stoped");
+		console.log("Stopped");
 
 		return "received" === await this.sendContentScriptMessage(
 			config.commandTypes.ACTION, 
@@ -175,7 +175,7 @@ class Main
 			return config.Texts[this._lang];
 		}
 
-		throw new Error("Language option is not present in the translation config");
+		throw new Error("Language not supported.");
 	}
 }
 

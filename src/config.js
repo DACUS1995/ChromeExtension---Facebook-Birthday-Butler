@@ -1,6 +1,6 @@
 "use strict"
 
-// --- COMANDS ---
+// --- COMMANDS ---
 export const commands = {
 	ACTIVATE: "activate",
 	STOP: "stop",

@@ -19,7 +19,7 @@ chrome.runtime.onInstalled.addListener(function()
 		birthday: null,
 		responses: null,
 		exceptions: null,
-		stoped: null
+		stopped: null
 	};
 
 	chrome.storage.sync.set(objDefaultStorage, function() {
