@@ -10,8 +10,8 @@ class Responses extends ComponentBase
 	}
 
 
-    render()
-    {
+	render()
+	{
 		const elButtonAddNewOption = document.createElement("button");
 		elButtonAddNewOption.className = "btn btn-outline-secondary btn-sm";
 		elButtonAddNewOption.id = "add-reponse-button";
@@ -21,8 +21,7 @@ class Responses extends ComponentBase
 
 		if(Array.isArray(this._responses) && this._responses.length != 0)
 		{
-			this._responses.forEach((value, index) => 
-			{
+			this._responses.forEach((value, index) => {
 				this.addNewResponseField(elButtonAddNewOption, value);
 			})
 		}

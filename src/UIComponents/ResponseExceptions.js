@@ -10,10 +10,10 @@ class ResponseExceptions extends ComponentBase
 	}
 	
 
-    render()
-    {
-        
-    }
+	render()
+	{
+	
+	}
 }
 
 export default ResponseExceptions;

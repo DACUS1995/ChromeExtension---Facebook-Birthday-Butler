@@ -1,8 +1,8 @@
 'use strict';
 
-import BirthdaySelect from "./Components/BirthdaySelect.js";
-import Responses from "./Components/Responses.js";
-import ResponseExceptions from "./Components/ResponseExceptions.js";
+import BirthdaySelect from "./UIComponents/BirthdaySelect.js";
+import Responses from "./UIComponents/Responses.js";
+import ResponseExceptions from "./UIComponents/ResponseExceptions.js";
 
 import * as config from "./config.js";
 
@@ -136,7 +136,7 @@ class Main
 
 	loadContentScript()
 	{
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+		chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
 			chrome.tabs.executeScript({
 				file: config.CONTENT_SCRIPT_FILE_PATH // Resolved relative to the Extension base URL :( )
 			});
@@ -144,10 +144,10 @@ class Main
 	}
 
 
-	sendContentScriptMessage(strMessageType, strSerializedContent)
+	async sendContentScriptMessage(strMessageType, strSerializedContent)
 	{
 		return new Promise((resolve, reject) => {
-			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+			chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
 				chrome.tabs.sendMessage(
 					tabs[0].id, 
 					{

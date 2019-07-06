@@ -27,5 +27,7 @@ export const Texts = {
 // --- CONSTANTS ---
 export const NOTIFICATION_CLASS_NAME = "_2n_9";
 export const HOSTNAME_TARAGET = "www.facebook.com";
-export const CONTENT_SCRIPT_FILE_PATH = "dist/bundleContentScript.js"; // Resolved relative to the Extension base URL :( 
+const CONTENT_SCRIPT_FILE_NAME = "bundleContentScript.js";
+export {CONTENT_SCRIPT_FILE_NAME};
+export const CONTENT_SCRIPT_FILE_PATH = `dist/${CONTENT_SCRIPT_FILE_NAME}`; // Resolved relative to the Extension base URL :( 
 
